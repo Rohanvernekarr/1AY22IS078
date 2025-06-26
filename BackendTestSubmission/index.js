@@ -1,8 +1,12 @@
 const express = require("express");
 const { requestLogger, Log } = require("../Logging Middleware/Logger");
-const nanoid = require("nanoid");
+const { nanoid } = require('nanoid');
+
 const bodyParser = require("body-parser");
 const app = express();
+const cors = require('cors');
+app.use(cors());
+
 const port = 5000;
 
 app.use(bodyParser.json());
@@ -37,7 +41,7 @@ app.post("/shorturls", async (req, res) => {
   const createdAt = new Date();
   const expiry = new Date(createdAt.getTime() + validity * 60000);
 
-  urlmap.set(code, {
+  urlMap.set(code, {
     url,
     createdAt,
     expiry,
