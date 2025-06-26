@@ -1,7 +1,7 @@
 const axios = require("axios")
 
 //log req backend
-export function requestLogger(req, res, next) {
+function requestLogger(req, res, next) {
   const startTime = Date.now();
 
   res.on('finish', async () => {
@@ -15,7 +15,7 @@ export function requestLogger(req, res, next) {
 }
 
 //resuable lof function
-export async function Log(stack, level, packageName, message) {
+ async function Log(stack, level, packageName, message) {
   try {
   
     const allowedStacks = ['backend', 'frontend'];
@@ -45,3 +45,4 @@ export async function Log(stack, level, packageName, message) {
     return { error: error.message };
   }
 }
+module.exports = { requestLogger, Log };

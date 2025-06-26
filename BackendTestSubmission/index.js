@@ -1,6 +1,6 @@
 const express= require("express")
 const bodyparser= require("body-parser")
-const requestLogger = require("../Logging Middleware/Logger")
+const { requestLogger, Log } = require("../Logging Middleware/Logger");
 const nanoid = require("nanoid");
 const bodyParser = require("body-parser");
 const app = express();
@@ -54,3 +54,9 @@ app.post('/shorturls',async (req,res)=>{
     });
 
 });
+
+
+app.listen(port,()=>{
+    console.log(`server running on port ${port}`);
+    
+})
