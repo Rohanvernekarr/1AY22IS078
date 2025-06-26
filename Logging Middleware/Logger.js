@@ -34,9 +34,14 @@ function requestLogger(req, res, next) {
 
     //req
     const payload = { stack, level, package: packageName, message };
-    const res = await axios.post(
+      const res = await axios.post(
       'http://20.244.56.144/evaluation-service/logs',
-      payload
+      payload,
+      {
+        headers: {
+          Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJNYXBDbGFpbXMiOnsiYXVkIjoiaHR0cDovLzIwLjI0NC41Ni4xNDQvZXZhbHVhdGlvbi1zZXJ2aWNlIiwiZW1haWwiOiJyb2hhbnIuMjIuYmVpc0BhY2hhcnlhLmFjLmluIiwiZXhwIjoxNzUwOTE4ODEzLCJpYXQiOjE3NTA5MTc5MTMsImlzcyI6IkFmZm9yZCBNZWRpY2FsIFRlY2hub2xvZ2llcyBQcml2YXRlIExpbWl0ZWQiLCJqdGkiOiJiYWQxNzYzZC1kYzYxLTRkYmQtODllYy1lOGJkOGY0MTM3N2EiLCJsb2NhbGUiOiJlbi1JTiIsIm5hbWUiOiJyb2hhbiByYXZpIHZlcm5la2FyIiwic3ViIjoiZTdkMzQyMGQtMjhlZC00MmJmLTlmNWYtMDI4YzM1Yjg1MmMwIn0sImVtYWlsIjoicm9oYW5yLjIyLmJlaXNAYWNoYXJ5YS5hYy5pbiIsIm5hbWUiOiJyb2hhbiByYXZpIHZlcm5la2FyIiwicm9sbE5vIjoiMWF5MjJpczA3OCIsImFjY2Vzc0NvZGUiOiJ4dEJTcU0iLCJjbGllbnRJRCI6ImU3ZDM0MjBkLTI4ZWQtNDJiZi05ZjVmLTAyOGMzNWI4NTJjMCIsImNsaWVudFNlY3JldCI6InZzd3dWZXd0WlNiQmN2WVoifQ.dNSZNpr55XRk1Hg19RTY7p8t6AmbR-8exahZ_6XbztU`
+        }
+      }
     );
 
     return res.data;
