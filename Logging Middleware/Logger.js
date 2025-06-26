@@ -1,4 +1,4 @@
-import axios from 'axios';
+const axios = require("axios")
 
 //log req backend
 export function requestLogger(req, res, next) {
