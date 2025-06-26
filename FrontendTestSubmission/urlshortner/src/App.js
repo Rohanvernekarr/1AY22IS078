@@ -1,25 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import { TextField, Button, Container, Typography } from '@mui/material';
+import axios from 'axios';
 
-function App() {
+export default function App() {
+  const [url, setUrl] = useState('');
+  const [shortLink, setShortLink] = useState(null);
+
+  const handleSubmit = async () => {
+    try {
+      const res = await axios.post('http://localhost:5000/shorturls', { url });
+      setShortLink(res.data.shortLink);
+    } catch (err) {
+      console.error(err);
+      alert('Error shortening URL');
+    }
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Container maxWidth="sm" style={{ marginTop: '3rem' }}>
+      <Typography variant="h4" gutterBottom>URL Shortener</Typography>
+      <TextField
+        fullWidth
+        label="Enter long URL"
+        value={url}
+        onChange={(e) => setUrl(e.target.value)}
+        margin="normal"
+      />
+      <Button variant="contained" onClick={handleSubmit}>Shorten</Button>
+      {shortLink && (
+        <Typography variant="h6" style={{ marginTop: '1rem' }}>
+          Shortened URL: <a href={shortLink}>{shortLink}</a>
+        </Typography>
+      )}
+    </Container>
+    
   );
 }
-
-export default App;
